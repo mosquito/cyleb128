@@ -40,7 +40,7 @@ jobs:
         run: .env/bin/pip install -Ue ".[develop]"
 
       - name: Running tests
-        run: .env/bin/pytest --color=yes -vv tests
+        run: .env/bin/pytest --color=yes -vv tests.py
 
   tests-windows:
     strategy:
@@ -73,5 +73,5 @@ jobs:
         shell: cmd
 
       - name: Running tests
-        run: .env\Scripts\pytest.exe --color=yes -vv tests
+        run: .env\Scripts\pytest.exe --color=yes -vv tests.py
         shell: cmd
