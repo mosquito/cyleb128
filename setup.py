@@ -53,4 +53,7 @@ setup(
         "Topic :: System",
         "Topic :: System :: Operating System",
     ],
+    extras_require={
+        "develop": ["pytest"],
+    },
 )
