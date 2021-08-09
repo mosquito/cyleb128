@@ -107,7 +107,7 @@ jobs:
           python-version: "3.9"
 
       - name: Install requires
-        run: python -m pip install twine cython
+        run: python -m pip install twine
 
       - name: Publishing to pypi
         run: twine upload --skip-existing --disable-progress-bar dist/*.whl
