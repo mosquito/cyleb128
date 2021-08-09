@@ -10,26 +10,6 @@ on:
     branches: [ master ]
 
 jobs:
-  lint:
-
-
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        linter:
-          - lint
-          - checkdoc
-          - mypy
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: tox ${{ matrix.linter }}
-        uses: docker://snakepacker/python:all
-        env:
-          TOXENV: ${{ matrix.linter }}
-        with:
-          args: tox
 
   tests:
     needs: lint
