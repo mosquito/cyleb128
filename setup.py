@@ -19,7 +19,7 @@ except ImportError:
 setup(
     name='cyleb128',
     ext_modules=extensions,
-    version="0.1.2",
+    version="0.1.3",
     packages=[],
     license="MIT",
     description="Fast LEB128 implementation in cython",
