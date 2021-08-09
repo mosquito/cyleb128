@@ -18,23 +18,29 @@ jobs:
       fail-fast: false
 
       matrix:
-        toxenv:
-          - py36
-          - py37
-          - py38
-          - py39
+        python-versions:
+          - 3.6
+          - 3.7
+          - 3.8
+          - 3.9
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: tox ${{ matrix.toxenv }}
-        uses: docker://snakepacker/python:all
-        env:
-          TOXENV: ${{ matrix.toxenv }}
-          AMQP_URL: amqp://guest:guest@rabbitmq
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+      - name: Setting up python ${{ matrix.python-versions }}
+        uses: actions/setup-python@v2
         with:
-          args: tox
+          python-version: ${{ matrix.python-versions }}
+          architecture: x64
+
+      - name: Creating a virtualenv python ${{ matrix.python-versions }}
+        run: python -m venv .env
+
+      - name: Installing project
+        run: .env/bin/pip install -Ue ".[develop]"
+
+      - name: Running tests
+        run: .env/bin/pytest --color=yes -vv tests
 
   tests-windows:
     strategy:
@@ -67,5 +73,5 @@ jobs:
         shell: cmd
 
       - name: Running tests
-        run: .env\Scripts\pytest.exe -v tests
+        run: .env\Scripts\pytest.exe --color=yes -vv tests
         shell: cmd
